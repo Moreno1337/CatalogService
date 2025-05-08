@@ -1,3 +1,5 @@
+using Catalog.Application.Interfaces;
+using Catalog.Application.Services;
 using Catalog.Domain.Interfaces;
 using Catalog.Infrastructure.Repositories;
 
@@ -8,6 +10,9 @@ builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Services
+builder.Services.AddScoped<IProductService, ProductService>();
 
 // Controllers
 builder.Services.AddScoped<IProductRepository, ProductRepository>();

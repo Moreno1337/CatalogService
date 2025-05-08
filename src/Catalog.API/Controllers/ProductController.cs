@@ -1,4 +1,5 @@
-﻿using Catalog.Domain.Interfaces;
+﻿using Catalog.Application.Interfaces;
+using Catalog.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.API.Controllers
@@ -7,15 +8,17 @@ namespace Catalog.API.Controllers
     [Route("api/[controller]")]
     public class ProductController : ControllerBase
     {
-        private readonly IProductRepository _repository;
+        private readonly IProductService _service;
 
-        public ProductController(IProductRepository repository)
+        public ProductController(IProductService service)
         {
-            _repository = repository;
+            _service = service;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll() =>
-            Ok(await _repository.GetAllAsync());
+        public async Task<IActionResult> GetAll()
+        {
+            return Ok(await _service.GetAllAsync());
+        }
     }
 }
